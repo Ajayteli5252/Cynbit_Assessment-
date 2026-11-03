@@ -3,19 +3,12 @@
 import React, { useState, useMemo } from 'react';
 import { 
   Clock, 
-  Globe2, 
   Mail, 
   Phone, 
   MapPin, 
   Send, 
   CheckCircle2, 
-  Sparkles, 
-  DollarSign, 
-  Printer, 
-  Bot, 
-  Layers, 
-  Building2, 
-  ShieldCheck 
+  Printer 
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -38,7 +31,7 @@ export function BlueprintSection() {
   const [message, setMessage] = useState('');
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submittedBlueprint, setSubmittedBlueprint] = useState<any | null>(null);
+  const [submittedBlueprint, setSubmittedBlueprint] = useState<{ id: string; projectName: string } | null>(null);
 
   // Dynamic Algorithmic Estimation
   const estimate = useMemo(() => {
@@ -99,7 +92,6 @@ export function BlueprintSection() {
     setIsSubmitting(true);
 
     try {
-      // POST to backend API
       const res = await fetch('/api/blueprint', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -125,10 +117,9 @@ export function BlueprintSection() {
         particleCount: 90,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#065457', '#0B6E6D', '#FDE68A'],
+        colors: ['#006067', '#006971', '#FFDDB3'],
       });
     } catch {
-      // Fallback
       setSubmittedBlueprint({
         id: `BP-${Date.now().toString().slice(-6)}`,
         projectName: fullName,
@@ -139,77 +130,83 @@ export function BlueprintSection() {
   };
 
   return (
-    <section id="blueprint" className="py-12 md:py-20">
+    <section id="blueprint" className="py-10 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* Section Header: Exact 1:1 match of "The Blueprint." from Image 2 */}
-        <div className="space-y-3">
-          <h2 className="text-4xl sm:text-5xl font-extrabold italic text-[#065457] tracking-tight font-sans">
-            The Blueprint.
+        {/* Section Header: Exact 1:1 match of "The Blueprint." from Screenshot */}
+        <div className="space-y-2">
+          {/* Top Badge: Exact "● Project Intelligence" */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFDDB3]/60 border border-[#FFDDB3] text-[#9A5816] text-[11px] font-bold tracking-wider uppercase">
+            <span className="w-2 h-2 rounded-full bg-[#9A5816]" />
+            <span>Project Intelligence</span>
+          </div>
+
+          <h2 className="text-4xl sm:text-5xl lg:text-[56px] font-black italic tracking-[-0.035em] text-[#111827] leading-[1.1]">
+            The <span className="text-[#006067] italic">Blueprint</span>.
           </h2>
-          <p className="text-base text-[#4B5563] max-w-2xl leading-relaxed">
+          <p className="text-base text-slate-600 max-w-2xl leading-relaxed font-normal">
             Tell us what you&apos;re building. Our team will analyze your requirements and prepare a tailored strategic overview before we connect.
           </p>
         </div>
 
-        {/* Main Grid: Form on Left (8 cols), Contact & Delivery Hub on Right (4 cols) */}
+        {/* Main Grid: Form on Left (8 cols), Cards & Contact Info on Right (4 cols) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: The Blueprint Form Card (8 cols) */}
-          <div className="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-10 shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-gray-100 space-y-8">
+          <div className="lg:col-span-8 bg-white rounded-[32px] p-6 sm:p-10 shadow-[0_10px_35px_rgba(0,0,0,0.03)] border border-slate-100 space-y-8">
             
             {submittedBlueprint ? (
               /* Success / Confirmed Blueprint Dossier */
-              <div className="text-center py-10 space-y-6">
-                <div className="w-16 h-16 mx-auto rounded-full bg-[#E5F2F1] flex items-center justify-center text-[#065457]">
+              <div className="text-center py-8 space-y-6">
+                <div className="w-16 h-16 mx-auto rounded-full bg-[#E5F2F1] flex items-center justify-center text-[#006067]">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
 
                 <div>
-                  <span className="text-xs font-bold font-mono tracking-wider text-[#065457] uppercase">
+                  <span className="text-xs font-bold font-mono tracking-wider text-[#006067] uppercase">
                     PROPOSAL REGISTERED · REF: {submittedBlueprint.id}
                   </span>
-                  <h3 className="text-2xl font-bold text-[#111827] mt-1 font-sans">
+                  <h3 className="text-2xl font-bold text-slate-900 mt-1 font-sans">
                     Architectural Blueprint Confirmed
                   </h3>
-                  <p className="text-sm text-gray-500 max-w-md mx-auto mt-2">
+                  <p className="text-sm text-slate-500 max-w-md mx-auto mt-2">
                     Thank you, {fullName}. Your project configuration has been routed to Cynbit&apos;s digital architects in Jaipur. We will connect within 24 hours.
                   </p>
                 </div>
 
                 {/* Proposal Summary Box */}
-                <div className="max-w-md mx-auto p-4 rounded-2xl bg-[#F8FAFB] border border-gray-200 text-left text-xs font-mono space-y-2">
-                  <div className="flex justify-between text-gray-500">
+                <div className="max-w-md mx-auto p-5 rounded-2xl bg-[#F7FAFA] border border-slate-200 text-left text-xs font-mono space-y-2.5">
+                  <div className="flex justify-between text-slate-500">
                     <span>Project Type:</span>
-                    <span className="text-[#065457] font-bold uppercase">{projectType}</span>
+                    <span className="text-[#006067] font-bold uppercase">{projectType}</span>
                   </div>
-                  <div className="flex justify-between text-gray-500">
+                  <div className="flex justify-between text-slate-500">
                     <span>Estimated Timeline:</span>
-                    <span className="text-gray-900 font-bold">{estimate.weeks} Weeks</span>
+                    <span className="text-slate-900 font-bold">{estimate.weeks} Weeks</span>
                   </div>
-                  <div className="flex justify-between text-gray-500">
+                  <div className="flex justify-between text-slate-500">
                     <span>Estimated Budget:</span>
-                    <span className="text-[#065457] font-bold">
+                    <span className="text-[#006067] font-bold">
                       ${estimate.minCost.toLocaleString()} - ${estimate.maxCost.toLocaleString()} USD
                     </span>
                   </div>
-                  <div className="flex justify-between text-gray-500">
+                  <div className="flex justify-between text-slate-500">
                     <span>Engineering Pod:</span>
-                    <span className="text-gray-900">{estimate.team}</span>
+                    <span className="text-slate-900">{estimate.team}</span>
                   </div>
                 </div>
 
                 <div className="pt-2 flex justify-center gap-3">
                   <button
                     onClick={() => window.print()}
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50 text-xs font-bold uppercase"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-bold uppercase"
                   >
                     <Printer className="w-4 h-4" />
                     <span>Print Blueprint Summary</span>
                   </button>
                   <button
                     onClick={() => setSubmittedBlueprint(null)}
-                    className="px-6 py-2.5 rounded-full bg-[#065457] text-white text-xs font-bold uppercase"
+                    className="px-6 py-2.5 rounded-full bg-[#006067] text-white text-xs font-bold uppercase"
                   >
                     New Calculation
                   </button>
@@ -219,14 +216,14 @@ export function BlueprintSection() {
               /* The Form with Our Interactive Improvement */
               <form onSubmit={handleSubmit} className="space-y-7">
                 
-                {/* ★ OUR WORKING IMPROVEMENT: STEP 1 - INTERACTIVE PROJECT SCOPER ★ */}
-                <div className="space-y-3 pb-6 border-b border-gray-100">
+                {/* ★ WORKING IMPROVEMENT: STEP 1 - PROJECT DOMAIN SCOPER ★ */}
+                <div className="space-y-3 pb-6 border-b border-slate-100">
                   <div className="flex items-center justify-between">
-                    <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
-                      1. What are you looking to build?
+                    <label className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500 block">
+                      1. Select Project Domain
                     </label>
-                    <span className="text-[10px] font-bold text-[#065457] bg-[#E5F2F1] px-2 py-0.5 rounded-full">
-                      Interactive Feature
+                    <span className="text-[10px] font-bold text-[#006067] bg-[#E5F2F1] px-2.5 py-0.5 rounded-full">
+                      Interactive Scoper
                     </span>
                   </div>
 
@@ -242,27 +239,27 @@ export function BlueprintSection() {
                         <div
                           key={p.id}
                           onClick={() => setProjectType(p.id as ProjectType)}
-                          className={`p-3 rounded-2xl border text-center cursor-pointer transition-all ${
+                          className={`p-3.5 rounded-2xl border text-center cursor-pointer transition-all ${
                             isSelected
-                              ? 'bg-[#E5F2F1] border-[#065457] text-[#065457] shadow-sm font-semibold'
-                              : 'bg-[#F9FAFB] border-gray-200/80 text-gray-600 hover:border-gray-300'
+                              ? 'bg-[#E5F2F1] border-[#006067] text-[#006067] shadow-sm font-bold'
+                              : 'bg-[#F1F4F4] border-transparent text-slate-700 hover:bg-[#EAEFEF]'
                           }`}
                         >
                           <div className="text-xs font-sans font-bold">{p.label}</div>
-                          <div className="text-[10px] text-gray-400 mt-0.5">{p.desc}</div>
+                          <div className="text-[10px] text-slate-400 mt-0.5">{p.desc}</div>
                         </div>
                       );
                     })}
                   </div>
                 </div>
 
-                {/* ★ OUR WORKING IMPROVEMENT: STEP 2 - SCALE & SPEED ★ */}
-                <div className="space-y-3 pb-6 border-b border-gray-100">
+                {/* ★ WORKING IMPROVEMENT: STEP 2 - SCALE & CADENCE ★ */}
+                <div className="space-y-3 pb-6 border-b border-slate-100">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
                     {/* Scale */}
                     <div className="space-y-2">
-                      <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+                      <label className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500 block">
                         Target Scale
                       </label>
                       <div className="grid grid-cols-3 gap-2">
@@ -277,8 +274,8 @@ export function BlueprintSection() {
                             onClick={() => setScale(s.id as ProjectScale)}
                             className={`py-2 rounded-xl text-xs font-semibold border transition-all ${
                               scale === s.id
-                                ? 'bg-[#065457] border-[#065457] text-white'
-                                : 'bg-[#F9FAFB] border-gray-200 text-gray-600 hover:border-gray-300'
+                                ? 'bg-[#006067] border-[#006067] text-white shadow-sm'
+                                : 'bg-[#F1F4F4] border-transparent text-slate-700 hover:bg-[#EAEFEF]'
                             }`}
                           >
                             {s.label}
@@ -287,9 +284,9 @@ export function BlueprintSection() {
                       </div>
                     </div>
 
-                    {/* Speed */}
+                    {/* Cadence */}
                     <div className="space-y-2">
-                      <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500 block">
+                      <label className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500 block">
                         Delivery Cadence
                       </label>
                       <div className="grid grid-cols-2 gap-2">
@@ -303,8 +300,8 @@ export function BlueprintSection() {
                             onClick={() => setUrgency(u.id as Urgency)}
                             className={`py-2 px-2 rounded-xl text-xs font-semibold border transition-all truncate ${
                               urgency === u.id
-                                ? 'bg-[#065457] border-[#065457] text-white'
-                                : 'bg-[#F9FAFB] border-gray-200 text-gray-600 hover:border-gray-300'
+                                ? 'bg-[#006067] border-[#006067] text-white shadow-sm'
+                                : 'bg-[#F1F4F4] border-transparent text-slate-700 hover:bg-[#EAEFEF]'
                             }`}
                           >
                             {u.label}
@@ -316,10 +313,10 @@ export function BlueprintSection() {
                   </div>
                 </div>
 
-                {/* ★ OUR WORKING IMPROVEMENT: REAL-TIME ESTIMATE BANNER ★ */}
-                <div className="p-4 rounded-2xl bg-gradient-to-r from-[#E5F2F1] to-[#EDF6F5] border border-[#CDE5E3] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                {/* ★ WORKING IMPROVEMENT: REAL-TIME SIZING PREVIEW ★ */}
+                <div className="p-4 rounded-2xl bg-gradient-to-r from-[#E5F2F1] to-[#EDF6F5] border border-[#CCE0DF] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div className="space-y-0.5">
-                    <span className="text-[10px] font-bold tracking-wider text-[#065457] uppercase block">
+                    <span className="text-[10px] font-bold tracking-[0.14em] text-[#006067] uppercase block">
                       REAL-TIME SIZING PREVIEW
                     </span>
                     <div className="text-sm font-extrabold text-[#111827]">
@@ -329,20 +326,20 @@ export function BlueprintSection() {
 
                   <div className="flex items-center gap-3 self-end sm:self-auto">
                     <div className="text-right">
-                      <div className="text-sm sm:text-base font-extrabold text-[#065457]">
+                      <div className="text-sm sm:text-base font-extrabold text-[#006067]">
                         {currency === 'USD' ? (
                           <>${estimate.minCost.toLocaleString()} - ${estimate.maxCost.toLocaleString()}</>
                         ) : (
                           <>₹{(estimate.minINR / 100000).toFixed(1)}L - ₹{(estimate.maxINR / 100000).toFixed(1)}L</>
                         )}
                       </div>
-                      <span className="text-[10px] text-gray-500 font-medium">Est. Range</span>
+                      <span className="text-[10px] text-slate-500 font-medium">Est. Bracket</span>
                     </div>
 
                     <button
                       type="button"
                       onClick={() => setCurrency(currency === 'USD' ? 'INR' : 'USD')}
-                      className="px-2 py-1 rounded-lg bg-white border border-gray-200 text-[10px] font-bold text-gray-600 hover:text-black"
+                      className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-[10px] font-bold text-slate-700 hover:text-black shadow-xs"
                     >
                       {currency === 'USD' ? 'Switch to INR' : 'Switch to USD'}
                     </button>
@@ -350,11 +347,11 @@ export function BlueprintSection() {
                 </div>
 
                 {/* EXACT ORIGINAL INPUTS FROM SCREENSHOT (Image 2) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-1">
                   
                   {/* Full Name */}
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold tracking-wider uppercase text-gray-500 block">
+                    <label className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-500 block">
                       FULL NAME
                     </label>
                     <input
@@ -363,13 +360,13 @@ export function BlueprintSection() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="e.g. Alex Rivera"
-                      className="w-full px-4 py-3 rounded-2xl bg-[#F3F4F6] border border-transparent focus:border-gray-300 focus:bg-white text-gray-900 text-sm focus:outline-none transition-all placeholder:text-gray-400"
+                      className="w-full h-14 px-6 rounded-full bg-[#F1F4F4] text-slate-900 placeholder:text-slate-400 border-none outline-none focus:ring-2 focus:ring-[#006067]/20 transition-all text-sm font-medium"
                     />
                   </div>
 
                   {/* Email Address */}
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold tracking-wider uppercase text-gray-500 block">
+                    <label className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-500 block">
                       EMAIL ADDRESS
                     </label>
                     <input
@@ -378,7 +375,7 @@ export function BlueprintSection() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="alex@example.com"
-                      className="w-full px-4 py-3 rounded-2xl bg-[#F3F4F6] border border-transparent focus:border-gray-300 focus:bg-white text-gray-900 text-sm focus:outline-none transition-all placeholder:text-gray-400"
+                      className="w-full h-14 px-6 rounded-full bg-[#F1F4F4] text-slate-900 placeholder:text-slate-400 border-none outline-none focus:ring-2 focus:ring-[#006067]/20 transition-all text-sm font-medium"
                     />
                   </div>
 
@@ -388,7 +385,7 @@ export function BlueprintSection() {
                   
                   {/* Company */}
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold tracking-wider uppercase text-gray-500 block">
+                    <label className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-500 block">
                       COMPANY (OPTIONAL)
                     </label>
                     <input
@@ -396,13 +393,13 @@ export function BlueprintSection() {
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
                       placeholder="Your Organization"
-                      className="w-full px-4 py-3 rounded-2xl bg-[#F3F4F6] border border-transparent focus:border-gray-300 focus:bg-white text-gray-900 text-sm focus:outline-none transition-all placeholder:text-gray-400"
+                      className="w-full h-14 px-6 rounded-full bg-[#F1F4F4] text-slate-900 placeholder:text-slate-400 border-none outline-none focus:ring-2 focus:ring-[#006067]/20 transition-all text-sm font-medium"
                     />
                   </div>
 
                   {/* Industry */}
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold tracking-wider uppercase text-gray-500 block">
+                    <label className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-500 block">
                       INDUSTRY (OPTIONAL)
                     </label>
                     <input
@@ -410,7 +407,7 @@ export function BlueprintSection() {
                       value={industry}
                       onChange={(e) => setIndustry(e.target.value)}
                       placeholder="e.g. Fintech, Healthcare"
-                      className="w-full px-4 py-3 rounded-2xl bg-[#F3F4F6] border border-transparent focus:border-gray-300 focus:bg-white text-gray-900 text-sm focus:outline-none transition-all placeholder:text-gray-400"
+                      className="w-full h-14 px-6 rounded-full bg-[#F1F4F4] text-slate-900 placeholder:text-slate-400 border-none outline-none focus:ring-2 focus:ring-[#006067]/20 transition-all text-sm font-medium"
                     />
                   </div>
 
@@ -418,7 +415,7 @@ export function BlueprintSection() {
 
                 {/* Your Message */}
                 <div className="space-y-1.5">
-                  <label className="text-[11px] font-bold tracking-wider uppercase text-gray-500 block">
+                  <label className="text-[11px] font-bold tracking-[0.14em] uppercase text-slate-500 block">
                     YOUR MESSAGE
                   </label>
                   <textarea
@@ -426,7 +423,7 @@ export function BlueprintSection() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="How can we help you architect your next chapter?"
-                    className="w-full px-4 py-3 rounded-2xl bg-[#F3F4F6] border border-transparent focus:border-gray-300 focus:bg-white text-gray-900 text-sm focus:outline-none transition-all placeholder:text-gray-400 resize-none"
+                    className="w-full p-6 rounded-[24px] bg-[#F1F4F4] text-slate-900 placeholder:text-slate-400 border-none outline-none focus:ring-2 focus:ring-[#006067]/20 transition-all text-sm font-medium resize-none min-h-[130px]"
                   />
                 </div>
 
@@ -435,14 +432,14 @@ export function BlueprintSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-9 py-4 rounded-full bg-[#065457] hover:bg-[#043E40] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-9 py-4 rounded-full bg-[#006067] hover:bg-[#004e54] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <span>Synthesizing Blueprint...</span>
                     ) : (
                       <>
                         <span>Generate & Lock Blueprint Proposal</span>
-                        <Send className="w-4 h-4 ml-1" />
+                        <Send className="w-4 h-4 ml-1 stroke-[2.5]" />
                       </>
                     )}
                   </button>
@@ -460,30 +457,44 @@ export function BlueprintSection() {
             <div className="grid grid-cols-2 gap-4">
               
               {/* Card 1: 24H RESPONSE SYNC */}
-              <div className="bg-white/80 rounded-3xl p-5 shadow-[0_10px_25px_rgba(0,0,0,0.03)] border border-gray-100 flex flex-col justify-between h-36">
-                <div className="w-8 h-8 rounded-full bg-[#E5F2F1] flex items-center justify-center text-[#065457]">
-                  <Clock className="w-4 h-4" />
+              <div className="bg-[#CFDBDB]/60 backdrop-blur-sm rounded-[28px] p-5 sm:p-6 shadow-sm border border-slate-200/50 flex flex-col justify-between aspect-square">
+                <div className="w-9 h-9 rounded-full bg-[#B6CECE] flex items-center justify-center text-[#006067]">
+                  <Clock className="w-4 h-4 stroke-[2.4]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-black text-gray-900 font-sans leading-none">
-                    24<span className="text-sm font-semibold text-gray-500">H</span>
+                  <div className="text-3xl sm:text-4xl font-black text-slate-900 leading-none">
+                    24<span className="text-base font-bold text-slate-600">H</span>
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mt-1 block">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-600 mt-1 block">
                     RESPONSE SYNC
                   </span>
                 </div>
               </div>
 
-              {/* Card 2: Global DELIVERY HUB (Exact blue card from screenshot) */}
-              <div className="bg-[#0A63AA] text-white rounded-3xl p-5 shadow-[0_10px_25px_rgba(10,99,170,0.2)] flex flex-col justify-between h-36">
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white">
-                  <Globe2 className="w-4 h-4" />
+              {/* Card 2: Global DELIVERY HUB (Exact royal blue card with network icon) */}
+              <div className="bg-[#0E6EAF] text-white rounded-[28px] p-5 sm:p-6 shadow-[0_10px_25px_rgba(14,110,175,0.25)] flex flex-col justify-between aspect-square">
+                <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="2.5" fill="currentColor" />
+                    <circle cx="12" cy="4" r="2" />
+                    <circle cx="12" cy="20" r="2" />
+                    <circle cx="5" cy="8" r="2" />
+                    <circle cx="19" cy="8" r="2" />
+                    <circle cx="5" cy="16" r="2" />
+                    <circle cx="19" cy="16" r="2" />
+                    <line x1="12" y1="6" x2="12" y2="9.5" />
+                    <line x1="12" y1="14.5" x2="12" y2="18" />
+                    <line x1="6.8" y1="9" x2="10" y2="11" />
+                    <line x1="14" y1="13" x2="17.2" y2="15" />
+                    <line x1="6.8" y1="15" x2="10" y2="13" />
+                    <line x1="14" y1="11" x2="17.2" y2="9" />
+                  </svg>
                 </div>
                 <div>
-                  <div className="text-xl font-bold font-sans leading-tight">
+                  <div className="text-2xl sm:text-3xl font-bold leading-tight tracking-tight">
                     Global
                   </div>
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-blue-100 mt-0.5 block">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-100 mt-0.5 block">
                     DELIVERY HUB
                   </span>
                 </div>
@@ -492,57 +503,57 @@ export function BlueprintSection() {
             </div>
 
             {/* Contact Details List: Mail, Phone, Address */}
-            <div className="space-y-5 pt-4 pl-2">
+            <div className="space-y-5 pt-3">
               
               {/* Mail */}
-              <div className="flex items-start gap-4">
-                <div className="w-9 h-9 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-gray-700 shrink-0 mt-0.5">
-                  <Mail className="w-4 h-4" />
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-full bg-[#006067] text-white flex items-center justify-center text-lg font-bold shrink-0 shadow-sm">
+                  @
                 </div>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400 block">
                     MAIL US AT:
                   </span>
-                  <a href="mailto:opportunities@cynbit.in" className="text-sm font-bold text-gray-900 block hover:text-[#065457]">
+                  <a href="mailto:opportunities@cynbit.in" className="text-[15px] font-bold text-[#006067] block hover:underline">
                     opportunities@cynbit.in
                   </a>
-                  <a href="mailto:support@cynbit.in" className="text-xs text-gray-500 hover:text-[#065457]">
+                  <a href="mailto:support@cynbit.in" className="text-[14px] font-semibold text-[#006067] block hover:underline">
                     support@cynbit.in
                   </a>
                 </div>
               </div>
 
               {/* Phone */}
-              <div className="flex items-start gap-4">
-                <div className="w-9 h-9 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-gray-700 shrink-0 mt-0.5">
-                  <Phone className="w-4 h-4" />
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-full bg-[#CFDBDB]/60 text-slate-700 flex items-center justify-center shrink-0">
+                  <Phone className="w-5 h-5 text-slate-700 stroke-[2.2]" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#0E6EAF] block">
                     CONTACT US AT:
                   </span>
-                  <span className="text-sm font-bold text-gray-900 block">
+                  <a href="tel:+918947962667" className="text-[16px] font-bold text-slate-900 block">
                     +91 89479 62667
-                  </span>
-                  <span className="text-xs text-gray-500">
+                  </a>
+                  <a href="tel:+917891209777" className="text-[14px] font-medium text-slate-500 block">
                     +91 78912 09777
-                  </span>
+                  </a>
                 </div>
               </div>
 
               {/* Address */}
-              <div className="flex items-start gap-4">
-                <div className="w-9 h-9 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-gray-700 shrink-0 mt-0.5">
-                  <MapPin className="w-4 h-4" />
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-full bg-[#CFDBDB]/60 text-slate-700 flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-slate-700 stroke-[2.2]" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400 block">
                     ADDRESS:
                   </span>
-                  <span className="text-sm font-bold text-gray-900 block leading-snug">
+                  <span className="text-[15px] font-bold text-slate-900 block leading-snug">
                     32/115 Pratap Nagar,
                   </span>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-[14px] font-medium text-slate-500 block">
                     Jaipur, RJ 302033
                   </span>
                 </div>
@@ -558,4 +569,3 @@ export function BlueprintSection() {
     </section>
   );
 }
-

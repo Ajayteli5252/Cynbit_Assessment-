@@ -8,7 +8,7 @@ import { Footer } from '@/components/Footer';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-[#FBFDFD] via-[#F0F7F6] to-[#E6F3F2] text-[#111827] font-sans">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-[#F7FAFA] via-[#EAF2F2]/30 to-[#F1F4F4] text-[#111827] font-sans">
       {/* 1. Header / Navbar from Screenshot 1 */}
       <Navbar />
 

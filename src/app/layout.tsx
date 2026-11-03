@@ -14,11 +14,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="light" style={{ colorScheme: 'light' }}>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet"
+        />
         <style dangerouslySetInnerHTML={{ __html: `
           html, body {
-            background: linear-gradient(135deg, #fbfdfd 0%, #f0f7f6 50%, #e6f3f2 100%) !important;
+            background-color: #F7FAFA !important;
             color: #111827 !important;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+            font-family: 'Plus Jakarta Sans', Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -37,7 +43,7 @@ export default function RootLayout({
           }
         `}} />
       </head>
-      <body className="antialiased min-h-screen text-slate-900">
+      <body className="antialiased min-h-screen text-slate-900 bg-[#F7FAFA]">
         {children}
       </body>
     </html>

@@ -7,103 +7,65 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100/80 transition-all">
+    <header className="sticky top-0 z-50 w-full bg-[#F7FAFA]/95 backdrop-blur-md transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
-        {/* Exact Cynbit Infinity Logo (CYN ∞ BIT) from Image 1 */}
-        <div className="flex items-center cursor-pointer">
-          <div className="flex items-center gap-1">
-            {/* SVG Replica of Cynbit's distinctive (CYN ∞ BIT) emblem */}
-            <svg
-              className="h-9 w-auto text-[#065457]"
-              viewBox="0 0 160 52"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Outer interconnected loop */}
-              <path
-                d="M32 4 C16 4, 4 14, 4 26 C4 38, 16 48, 32 48 C46 48, 56 40, 68 31 L92 21 C104 12, 114 4, 128 4 C144 4, 156 14, 156 26 C156 38, 144 48, 128 48 C114 48, 104 40, 92 31 L68 21 C56 12, 46 4, 32 4 Z"
-                stroke="currentColor"
-                strokeWidth="2.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
-              {/* Left word: CYN */}
-              <text
-                x="32"
-                y="31"
-                textAnchor="middle"
-                fontSize="14"
-                fontWeight="700"
-                fill="currentColor"
-                fontFamily="system-ui, -apple-system, sans-serif"
-                letterSpacing="0.5"
-              >
-                CYN
-              </text>
-              {/* Right word: BIT */}
-              <text
-                x="128"
-                y="31"
-                textAnchor="middle"
-                fontSize="14"
-                fontWeight="700"
-                fill="currentColor"
-                fontFamily="system-ui, -apple-system, sans-serif"
-                letterSpacing="0.5"
-              >
-                BIT
-              </text>
-            </svg>
-          </div>
-        </div>
+        {/* Exact Cynbit Infinity Logo from Original Site Screenshot */}
+        <a href="#" className="flex items-center cursor-pointer select-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/cynbit-logo-transparent.png"
+            alt="Cynbit Technologies"
+            className="h-8 sm:h-9 w-auto object-contain"
+          />
+        </a>
 
-        {/* Center Desktop Navigation - Exact items from screenshot */}
-        <nav className="hidden md:flex items-center gap-8 text-[13px] font-semibold tracking-wider text-gray-700 uppercase">
-          <div className="flex items-center gap-1 hover:text-[#065457] cursor-pointer transition-colors">
+        {/* Center Desktop Navigation - Exact items and typography from screenshot */}
+        <nav className="hidden md:flex items-center gap-7 text-[12px] font-bold tracking-[0.1em] text-slate-700 uppercase">
+          <div className="flex items-center gap-1 hover:text-[#006067] cursor-pointer transition-colors">
             <span>COMPANY</span>
-            <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400 stroke-[2.5]" />
           </div>
 
-          <div className="flex items-center gap-1 hover:text-[#065457] cursor-pointer transition-colors">
+          <div className="flex items-center gap-1 hover:text-[#006067] cursor-pointer transition-colors">
             <span>EXPERTISE</span>
-            <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400 stroke-[2.5]" />
           </div>
 
-          <div className="flex items-center gap-1 hover:text-[#065457] cursor-pointer transition-colors">
+          <div className="flex items-center gap-1 hover:text-[#006067] cursor-pointer transition-colors">
             <span>BITELEVATE</span>
-            <ChevronDown className="w-3.5 h-3.5 text-gray-500" />
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400 stroke-[2.5]" />
           </div>
 
-          <a href="#blog" className="hover:text-[#065457] transition-colors">
+          <a href="#blog" className="hover:text-[#006067] transition-colors">
             BLOG
           </a>
 
           {/* Active Contact Item with Teal Underline */}
           <a
             href="#contact"
-            className="text-[#065457] relative py-1 border-b-2 border-[#065457]"
+            className="text-[#006971] relative py-1 border-b-2 border-[#006971] font-extrabold"
           >
             CONTACT
           </a>
         </nav>
 
-        {/* Right CTA Button - Exact JOIN US pill */}
+        {/* Right CTA Button - Exact "JOIN US" rounded pill */}
         <div className="hidden md:flex items-center">
           <a
             href="#blueprint"
-            className="px-6 py-2.5 rounded-full bg-[#065457] hover:bg-[#043e40] text-white text-[12px] font-bold tracking-wider uppercase shadow-sm transition-all"
+            className="px-7 py-2.5 rounded-full bg-[#006067] hover:bg-[#004e54] text-white text-[12px] font-bold tracking-wider uppercase shadow-sm transition-all"
           >
             JOIN US
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex md:hidden items-center">
+        {/* Mobile Hamburger Toggle */}
+        <div className="md:hidden flex items-center">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-gray-700 hover:text-[#065457]"
+            className="p-2 text-slate-700 hover:text-[#006067] focus:outline-none"
+            aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -111,19 +73,31 @@ export function Navbar() {
 
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-white px-6 py-4 space-y-3 text-sm font-semibold tracking-wider text-gray-800">
-          <div className="py-2 border-b border-gray-100">COMPANY</div>
-          <div className="py-2 border-b border-gray-100">EXPERTISE</div>
-          <div className="py-2 border-b border-gray-100">BITELEVATE</div>
-          <div className="py-2 border-b border-gray-100">BLOG</div>
-          <div className="py-2 text-[#065457] font-bold">CONTACT</div>
+        <div className="md:hidden bg-white/95 backdrop-blur-lg border-b border-gray-200 px-6 py-6 space-y-4 text-xs font-bold tracking-wider uppercase">
+          <div className="flex items-center justify-between py-2 border-b border-gray-100 text-slate-800">
+            <span>COMPANY</span>
+            <ChevronDown className="w-4 h-4 text-slate-400" />
+          </div>
+          <div className="flex items-center justify-between py-2 border-b border-gray-100 text-slate-800">
+            <span>EXPERTISE</span>
+            <ChevronDown className="w-4 h-4 text-slate-400" />
+          </div>
+          <div className="flex items-center justify-between py-2 border-b border-gray-100 text-slate-800">
+            <span>BITELEVATE</span>
+            <ChevronDown className="w-4 h-4 text-slate-400" />
+          </div>
+          <a href="#blog" className="block py-2 border-b border-gray-100 text-slate-800">
+            BLOG
+          </a>
+          <a href="#contact" className="block py-2 text-[#006971] font-extrabold">
+            CONTACT
+          </a>
           <div className="pt-2">
             <a
               href="#blueprint"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block w-full text-center py-2.5 rounded-full bg-[#065457] text-white text-xs font-bold uppercase"
+              className="block w-full text-center py-3 rounded-full bg-[#006067] text-white text-xs font-bold uppercase tracking-wider"
             >
               JOIN US
             </a>
