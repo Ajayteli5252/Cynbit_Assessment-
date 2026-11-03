@@ -235,3 +235,4 @@ export const SKILL_TREE_DATA: Record<CareerTrack, SkillNode[]> = {
     },
   ],
 };
+

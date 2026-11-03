@@ -217,3 +217,4 @@ export function updateCandidateStatus(id: string, status: CandidateSubmission['s
   }
   return false;
 }
+

@@ -88,3 +88,4 @@ export function TrackSelector({ selectedTrack, onSelectTrack }: TrackSelectorPro
     </div>
   );
 }
+

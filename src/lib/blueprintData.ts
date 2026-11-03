@@ -186,3 +186,4 @@ export function calculateBlueprintEstimate(params: {
     architectureHighlights,
   };
 }
+

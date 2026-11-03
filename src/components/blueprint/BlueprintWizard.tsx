@@ -23,12 +23,10 @@ import {
   Building2, 
   ShieldCheck, 
   Cpu, 
-  Layers, 
-  Sliders, 
-  Cloud, 
-  Zap, 
   Sparkles, 
-  Lock 
+  Check, 
+  Zap, 
+  Clock 
 } from 'lucide-react';
 import { clsx } from 'clsx';
 
@@ -37,7 +35,7 @@ interface BlueprintWizardProps {
 }
 
 export function BlueprintWizard({ onNewSubmission }: BlueprintWizardProps) {
-  // Configurator state
+  // Simplified state
   const [domain, setDomain] = useState<ProjectDomain>('ai-agents');
   const [userScale, setUserScale] = useState<UserScale>('growth');
   const [aiFeatures, setAiFeatures] = useState<string[]>(['rag', 'autonomous-workflows']);
@@ -45,7 +43,7 @@ export function BlueprintWizard({ onNewSubmission }: BlueprintWizardProps) {
   const [compliance, setCompliance] = useState<ComplianceLevel>('standard');
   const [urgency, setUrgency] = useState<TimelineUrgency>('accelerated');
 
-  // Modal state
+  // Modal
   const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
 
   // Dynamic estimate calculation
@@ -82,314 +80,232 @@ export function BlueprintWizard({ onNewSubmission }: BlueprintWizardProps) {
   };
 
   return (
-    <div className="space-y-8">
-      
-      {/* Hero Intro */}
-      <div className="text-center max-w-3xl mx-auto space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/40 bg-cyan-950/40 text-cyan-400 font-mono text-xs shadow-[0_0_15px_rgba(0,240,255,0.15)]">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>CYNBIT ARCHITECTURAL SCOPER · V2.4</span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-100 tracking-tight font-mono">
-          Engineering Scope & <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500">Architecture Estimator</span>
-        </h1>
-        <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-          Configure your software specifications interactively. Receive instant architectural topology, sprint timelines, dedicated engineer pod allocation, and a formalized engineering blueprint.
-        </p>
-      </div>
-
-      {/* Main Two-Column Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <section id="estimator" className="py-16 md:py-24 border-t border-slate-800/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
-        {/* Left Column: Interactive Configuration Controls (7 cols) */}
-        <div className="lg:col-span-7 space-y-6">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/40 bg-cyan-950/40 text-cyan-400 font-mono text-xs">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>INTERACTIVE ESTIMATION ENGINE</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-100 font-sans tracking-tight">
+            Calculate Your Project Blueprint
+          </h2>
+          <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+            Select your requirements below. See your estimated delivery timeline, dedicated team sizing, and budget in real time.
+          </p>
+        </div>
+
+        {/* Two-Column Responsive Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Step 1: Select Domain */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 sm:p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
-              <span className="text-xs font-mono font-semibold text-cyan-400 flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-cyan-950 border border-cyan-500/60 flex items-center justify-center text-[10px]">
-                  1
+          {/* Left Column: Clean & Intuitive Step-by-Step Inputs (7 cols) */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            {/* Step 1: Project Type */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-md p-5 sm:p-6 space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-cyan-950 border border-cyan-500 flex items-center justify-center text-[10px]">
+                    1
+                  </span>
+                  What are you looking to build?
                 </span>
-                SELECT ARCHITECTURAL DOMAIN
-              </span>
-              <span className="text-[11px] font-mono text-slate-500">Step 1 of 4</span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {DOMAINS.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => setDomain(item.id)}
-                  className={clsx(
-                    'p-4 rounded-xl border text-left cursor-pointer transition-all duration-200',
-                    domain === item.id
-                      ? 'border-cyan-400/80 bg-cyan-950/30 shadow-[0_0_20px_rgba(0,240,255,0.15)]'
-                      : 'border-slate-800/80 bg-slate-900/40 hover:border-slate-700 hover:bg-slate-900/70'
-                  )}
-                >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="p-2 rounded-lg bg-slate-950 border border-slate-800">
-                      {getDomainIcon(item.iconName)}
-                    </div>
-                    {domain === item.id && (
-                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-                    )}
-                  </div>
-                  <h4 className="font-semibold text-sm text-slate-100 font-mono">
-                    {item.title}
-                  </h4>
-                  <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                    {item.tagline}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Step 2: Scale & Urgency */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 sm:p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
-              <span className="text-xs font-mono font-semibold text-cyan-400 flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-cyan-950 border border-cyan-500/60 flex items-center justify-center text-[10px]">
-                  2
-                </span>
-                USER TRAFFIC SCALE & SPRINT CADENCE
-              </span>
-              <span className="text-[11px] font-mono text-slate-500">Step 2 of 4</span>
-            </div>
-
-            {/* Scale Options */}
-            <div className="space-y-2">
-              <label className="block text-xs font-mono text-slate-300">
-                Target User Scale & Concurrency
-              </label>
-              <div className="grid grid-cols-3 gap-2.5">
-                {[
-                  { id: 'seed-mvp', label: 'Seed / MVP', desc: '< 10k MAU' },
-                  { id: 'growth', label: 'High Growth', desc: '10k - 250k MAU' },
-                  { id: 'enterprise', label: 'Enterprise', desc: '> 250k+ MAU' },
-                ].map((s) => (
-                  <button
-                    key={s.id}
-                    type="button"
-                    onClick={() => setUserScale(s.id as UserScale)}
-                    className={clsx(
-                      'p-3 rounded-lg border text-center transition-all',
-                      userScale === s.id
-                        ? 'border-cyan-400 bg-cyan-950/40 text-cyan-300 font-semibold'
-                        : 'border-slate-800 bg-slate-900/40 text-slate-400 hover:border-slate-700'
-                    )}
-                  >
-                    <div className="text-xs font-mono">{s.label}</div>
-                    <div className="text-[10px] text-slate-500 mt-0.5">{s.desc}</div>
-                  </button>
-                ))}
+                <span className="text-[11px] font-mono text-slate-500">Select One</span>
               </div>
-            </div>
 
-            {/* Urgency */}
-            <div className="space-y-2 pt-2">
-              <label className="block text-xs font-mono text-slate-300">
-                Delivery Urgency & Engineering Pod Model
-              </label>
-              <div className="grid grid-cols-3 gap-2.5">
-                {[
-                  { id: 'standard', label: 'Standard', desc: '8-12 Wk Timeline' },
-                  { id: 'accelerated', label: 'Accelerated', desc: '4-6 Wk Timeline' },
-                  { id: 'sprint', label: 'Blitz Sprint', desc: '2-3 Wk Multi-Pod' },
-                ].map((u) => (
-                  <button
-                    key={u.id}
-                    type="button"
-                    onClick={() => setUrgency(u.id as TimelineUrgency)}
-                    className={clsx(
-                      'p-3 rounded-lg border text-center transition-all',
-                      urgency === u.id
-                        ? 'border-cyan-400 bg-cyan-950/40 text-cyan-300 font-semibold'
-                        : 'border-slate-800 bg-slate-900/40 text-slate-400 hover:border-slate-700'
-                    )}
-                  >
-                    <div className="text-xs font-mono">{u.label}</div>
-                    <div className="text-[10px] text-slate-500 mt-0.5">{u.desc}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Step 3: AI & Advanced Capabilities */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 sm:p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
-              <span className="text-xs font-mono font-semibold text-cyan-400 flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-cyan-950 border border-cyan-500/60 flex items-center justify-center text-[10px]">
-                  3
-                </span>
-                COGNITIVE AI & SYSTEM CAPABILITIES
-              </span>
-              <span className="text-[11px] font-mono text-slate-500">Step 3 of 4</span>
-            </div>
-
-            <div className="space-y-2">
-              {AI_FEATURE_OPTIONS.map((feat) => {
-                const isSelected = aiFeatures.includes(feat.id);
-                return (
-                  <div
-                    key={feat.id}
-                    onClick={() => toggleAiFeature(feat.id)}
-                    className={clsx(
-                      'p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all',
-                      isSelected
-                        ? 'border-cyan-500/60 bg-cyan-950/30 text-slate-100 shadow-[0_0_15px_rgba(0,240,255,0.08)]'
-                        : 'border-slate-800/80 bg-slate-900/30 text-slate-400 hover:border-slate-700'
-                    )}
-                  >
-                    <div className="pr-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-semibold font-mono text-slate-200">
-                          {feat.label}
-                        </span>
-                        <span className="text-[10px] font-mono text-cyan-400 px-1.5 py-0.5 rounded bg-cyan-950 border border-cyan-800/50">
-                          +{feat.extraWeeks} wks
-                        </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {DOMAINS.map((item) => {
+                  const isSelected = domain === item.id;
+                  return (
+                    <div
+                      key={item.id}
+                      onClick={() => setDomain(item.id)}
+                      className={clsx(
+                        'p-4 rounded-xl border cursor-pointer transition-all duration-200 text-left',
+                        isSelected
+                          ? 'border-cyan-400 bg-cyan-950/30 shadow-[0_0_20px_rgba(0,240,255,0.12)] ring-1 ring-cyan-400/40'
+                          : 'border-slate-800 bg-slate-950/50 hover:border-slate-700 hover:bg-slate-900/60'
+                      )}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                          {getDomainIcon(item.iconName)}
+                        </div>
+                        {isSelected && (
+                          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                        )}
                       </div>
-                      <p className="text-[11px] text-slate-400 mt-0.5">
-                        {feat.desc}
+                      <h4 className="font-bold text-sm text-slate-100 font-sans">
+                        {item.title}
+                      </h4>
+                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                        {item.tagline}
                       </p>
                     </div>
-
-                    <div className={clsx(
-                      'w-5 h-5 rounded flex items-center justify-center border transition-colors',
-                      isSelected
-                        ? 'bg-cyan-500 border-cyan-400 text-slate-950 font-bold text-xs'
-                        : 'border-slate-700 bg-slate-950'
-                    )}>
-                      {isSelected ? '✓' : ''}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-          </div>
 
-          {/* Step 4: Cloud Provider & Zero-Trust Compliance */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-950/60 p-5 sm:p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
-              <span className="text-xs font-mono font-semibold text-cyan-400 flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-cyan-950 border border-cyan-500/60 flex items-center justify-center text-[10px]">
-                  4
+            {/* Step 2: Project Scale & Urgency */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-md p-5 sm:p-6 space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-cyan-950 border border-cyan-500 flex items-center justify-center text-[10px]">
+                    2
+                  </span>
+                  Scale & Delivery Urgency
                 </span>
-                CLOUD INFRASTRUCTURE & ZERO-TRUST SECURITY
-              </span>
-              <span className="text-[11px] font-mono text-slate-500">Step 4 of 4</span>
-            </div>
+              </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              
-              {/* Cloud Provider */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-mono text-slate-300 flex items-center gap-1.5">
-                  <Cloud className="w-3.5 h-3.5 text-cyan-400" />
-                  Target Cloud Ecosystem
+              <div className="space-y-3">
+                <label className="block text-xs font-mono text-slate-300">
+                  Target Traffic & Concurrency
                 </label>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-3 gap-2.5">
                   {[
-                    { id: 'aws', label: 'AWS Cloud' },
-                    { id: 'gcp', label: 'Google Cloud' },
-                    { id: 'azure', label: 'MS Azure' },
-                    { id: 'hybrid', label: 'Multi-Cloud' },
-                  ].map((c) => (
+                    { id: 'seed-mvp', label: 'MVP / Startup', desc: 'Fast initial launch' },
+                    { id: 'growth', label: 'High Growth', desc: '10k+ active users' },
+                    { id: 'enterprise', label: 'Enterprise', desc: 'High concurrency & SLA' },
+                  ].map((s) => (
                     <button
-                      key={c.id}
+                      key={s.id}
                       type="button"
-                      onClick={() => setCloudProvider(c.id as CloudProvider)}
+                      onClick={() => setUserScale(s.id as UserScale)}
                       className={clsx(
-                        'p-2.5 rounded-lg border text-xs font-mono transition-all',
-                        cloudProvider === c.id
-                          ? 'border-cyan-400 bg-cyan-950/40 text-cyan-300 font-semibold'
-                          : 'border-slate-800 bg-slate-900/40 text-slate-400 hover:border-slate-700'
+                        'p-3 rounded-xl border text-center transition-all',
+                        userScale === s.id
+                          ? 'border-cyan-400 bg-cyan-950/40 text-cyan-300 font-semibold shadow-sm'
+                          : 'border-slate-800 bg-slate-950/60 text-slate-400 hover:border-slate-700'
                       )}
                     >
-                      {c.label}
+                      <div className="text-xs font-sans font-bold">{s.label}</div>
+                      <div className="text-[10px] text-slate-500 font-mono mt-0.5">{s.desc}</div>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Compliance Level */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-mono text-slate-300 flex items-center gap-1.5">
-                  <Lock className="w-3.5 h-3.5 text-purple-400" />
-                  Security & Compliance Shield
+              <div className="space-y-3 pt-2">
+                <label className="block text-xs font-mono text-slate-300">
+                  Target Sprint Timeline
                 </label>
-                <div className="grid grid-cols-1 gap-2">
+                <div className="grid grid-cols-3 gap-2.5">
                   {[
-                    { id: 'standard', label: 'Standard Enterprise' },
-                    { id: 'hipaa-soc2', label: 'HIPAA / SOC2 Audited' },
-                    { id: 'zero-trust', label: 'Zero-Trust mTLS Mesh' },
-                  ].map((sec) => (
+                    { id: 'standard', label: 'Standard', desc: '8-12 Weeks' },
+                    { id: 'accelerated', label: 'Accelerated', desc: '4-6 Weeks' },
+                    { id: 'sprint', label: 'Blitz Sprint', desc: '2-3 Weeks (Fast)' },
+                  ].map((u) => (
                     <button
-                      key={sec.id}
+                      key={u.id}
                       type="button"
-                      onClick={() => setCompliance(sec.id as ComplianceLevel)}
+                      onClick={() => setUrgency(u.id as TimelineUrgency)}
                       className={clsx(
-                        'p-2 rounded-lg border text-xs font-mono text-left px-3 transition-all flex items-center justify-between',
-                        compliance === sec.id
-                          ? 'border-purple-400 bg-purple-950/40 text-purple-300 font-semibold'
-                          : 'border-slate-800 bg-slate-900/40 text-slate-400 hover:border-slate-700'
+                        'p-3 rounded-xl border text-center transition-all',
+                        urgency === u.id
+                          ? 'border-cyan-400 bg-cyan-950/40 text-cyan-300 font-semibold shadow-sm'
+                          : 'border-slate-800 bg-slate-950/60 text-slate-400 hover:border-slate-700'
                       )}
                     >
-                      <span>{sec.label}</span>
-                      {compliance === sec.id && (
-                        <span className="text-[10px] text-purple-400 font-bold">ACTIVE</span>
-                      )}
+                      <div className="text-xs font-sans font-bold">{u.label}</div>
+                      <div className="text-[10px] text-slate-500 font-mono mt-0.5">{u.desc}</div>
                     </button>
                   ))}
                 </div>
               </div>
-
             </div>
+
+            {/* Step 3: Add-on Capabilities */}
+            <div className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-md p-5 sm:p-6 space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-cyan-950 border border-cyan-500 flex items-center justify-center text-[10px]">
+                    3
+                  </span>
+                  Select Additional Capabilities
+                </span>
+                <span className="text-[11px] font-mono text-slate-500">Optional</span>
+              </div>
+
+              <div className="space-y-2">
+                {AI_FEATURE_OPTIONS.map((feat) => {
+                  const isSelected = aiFeatures.includes(feat.id);
+                  return (
+                    <div
+                      key={feat.id}
+                      onClick={() => toggleAiFeature(feat.id)}
+                      className={clsx(
+                        'p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all',
+                        isSelected
+                          ? 'border-cyan-400/70 bg-cyan-950/30 text-slate-100 shadow-sm'
+                          : 'border-slate-800 bg-slate-950/40 text-slate-400 hover:border-slate-700'
+                      )}
+                    >
+                      <div>
+                        <div className="font-semibold text-xs font-sans text-slate-200">
+                          {feat.label}
+                        </div>
+                        <div className="text-[11px] text-slate-400 mt-0.5 font-sans">
+                          {feat.desc}
+                        </div>
+                      </div>
+
+                      <div className={clsx(
+                        'w-5 h-5 rounded-md flex items-center justify-center border shrink-0 ml-3 transition-colors',
+                        isSelected
+                          ? 'bg-cyan-500 border-cyan-400 text-slate-950 font-bold text-xs'
+                          : 'border-slate-700 bg-slate-900'
+                      )}>
+                        {isSelected ? '✓' : ''}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: Real-time Synthesis & Action (5 cols) */}
+          <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+            
+            {/* Live Topology Diagram */}
+            <ArchitecturePreview
+              domain={domain}
+              cloudProvider={cloudProvider}
+              compliance={compliance}
+              userScale={userScale}
+              aiFeatures={aiFeatures}
+            />
+
+            {/* Instant Sizing & Estimation Summary Card */}
+            <EstimationSummary
+              estimate={currentEstimate}
+              onOpenProposal={() => setIsProposalModalOpen(true)}
+              projectName="Enterprise System Blueprint"
+            />
+
           </div>
 
         </div>
 
-        {/* Right Column: Real-time Synthesis & Dynamic Visualizer (5 cols) */}
-        <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-20">
-          
-          {/* Dynamic Architecture Visualizer */}
-          <ArchitecturePreview
-            domain={domain}
-            cloudProvider={cloudProvider}
-            compliance={compliance}
-            userScale={userScale}
-            aiFeatures={aiFeatures}
-          />
-
-          {/* Real-time Sizing & Proposal Synthesis */}
-          <EstimationSummary
-            estimate={currentEstimate}
-            onOpenProposal={() => setIsProposalModalOpen(true)}
-            projectName="Enterprise Autonomous Architecture"
-          />
-
-        </div>
+        {/* Modal for PDF/Print & Formal Proposal */}
+        <ProposalModal
+          isOpen={isProposalModalOpen}
+          onClose={() => setIsProposalModalOpen(false)}
+          domain={domain}
+          userScale={userScale}
+          cloudProvider={cloudProvider}
+          compliance={compliance}
+          urgency={urgency}
+          aiFeatures={aiFeatures}
+          estimate={currentEstimate}
+          onSuccessSubmission={onNewSubmission}
+        />
 
       </div>
-
-      {/* Proposal Modal */}
-      <ProposalModal
-        isOpen={isProposalModalOpen}
-        onClose={() => setIsProposalModalOpen(false)}
-        domain={domain}
-        userScale={userScale}
-        cloudProvider={cloudProvider}
-        compliance={compliance}
-        urgency={urgency}
-        aiFeatures={aiFeatures}
-        estimate={currentEstimate}
-        onSuccessSubmission={onNewSubmission}
-      />
-
-    </div>
+    </section>
   );
 }

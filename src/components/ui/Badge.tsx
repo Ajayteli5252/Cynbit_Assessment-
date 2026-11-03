@@ -35,3 +35,4 @@ export function Badge({ children, variant = 'cyan', size = 'md', className }: Ba
     </span>
   );
 }
+

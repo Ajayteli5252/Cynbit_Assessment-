@@ -180,3 +180,4 @@ export function SkillTreeGraph({ track }: SkillTreeGraphProps) {
     </div>
   );
 }
+

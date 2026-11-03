@@ -316,3 +316,4 @@ export function ProposalModal({
     </div>
   );
 }
+

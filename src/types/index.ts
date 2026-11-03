@@ -93,3 +93,4 @@ export interface CandidateSubmission {
   answers: { questionId: string; selectedIndex: number; score: number }[];
   status: 'Under Review' | 'Shortlisted for Interview' | 'BitElevate Cohort Selected';
 }
+
