@@ -1,124 +1,106 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck, Zap, Activity } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { ArrowRight, ShieldCheck, Cpu } from 'lucide-react';
 
 export function Hero() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
+  const scrollToBlueprint = () => {
+    const el = document.getElementById('blueprint');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 text-center overflow-hidden">
-      
-      {/* Background Subtle Gradient Blobs */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="absolute top-1/3 left-1/4 w-[300px] h-[300px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none -z-10" />
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
+    <section className="relative pt-12 pb-16 md:pt-16 md:pb-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Top Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-400 font-mono text-xs shadow-[0_0_20px_rgba(0,240,255,0.15)] animate-fade-in">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          <span>CYNBIT TECHNOLOGIES · DIGITAL ARCHITECTS</span>
-        </div>
-
-        {/* Hero Main Heading */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-slate-100 tracking-tight leading-[1.15] font-sans">
-          Engineering <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500">Autonomous AI</span> & Modern Software Systems
-        </h1>
-
-        {/* Subtitle */}
-        <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          We design, build, and scale high-performance digital platforms, cognitive AI workflows, and zero-trust cloud architecture for ambitious enterprises worldwide.
-        </p>
-
-        {/* Action Buttons */}
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button
-            onClick={() => scrollTo('estimator')}
-            variant="primary"
-            size="lg"
-            className="w-full sm:w-auto shadow-[0_0_30px_rgba(0,240,255,0.35)] hover:shadow-[0_0_40px_rgba(0,240,255,0.55)] rounded-full px-8 py-3.5 font-semibold text-sm"
-          >
-            <span>Launch Blueprint Estimator</span>
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
-
-          <Button
-            onClick={() => scrollTo('services')}
-            variant="outline"
-            size="lg"
-            className="w-full sm:w-auto rounded-full px-7 py-3.5 text-sm"
-          >
-            <span>Explore Services</span>
-          </Button>
-        </div>
-
-        {/* Trust & Metric Highlights Bar */}
-        <div className="pt-12 grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-slate-800/80 mt-12 text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          <div className="p-3.5 rounded-xl border border-slate-800/70 bg-slate-900/40">
-            <div className="flex items-center gap-1.5 text-xs font-mono text-cyan-400 mb-1">
-              <Zap className="w-3.5 h-3.5" />
-              <span>SLA GUARANTEE</span>
+          {/* Left Column: Heading, Subtitle & Buttons (8 cols) */}
+          <div className="lg:col-span-8 space-y-6">
+            
+            {/* Top Badge: Exact "● INQUIRY HUB" from screenshot */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FCEEE2] border border-[#F5D8BF] text-[#7D4D1E] text-xs font-bold uppercase tracking-wider shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#7D4D1E]" />
+              <span>INQUIRY HUB</span>
             </div>
-            <div className="text-xl font-bold font-mono text-slate-100">
-              99.95%
+
+            {/* Main Headline: Exact wording & styling from screenshot */}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold italic tracking-tight text-[#111827] leading-[1.08] font-sans">
+              Start Your Next<br />
+              <span className="text-[#0B6E6D] not-italic">Project</span> With Us
+            </h1>
+
+            {/* Paragraph: Exact text from screenshot */}
+            <p className="text-base sm:text-lg text-[#4B5563] max-w-2xl leading-relaxed">
+              Whether you&apos;re building a product, automating operations, or scaling digitally, Our architects are ready to design the solution that scales with your ambition. The Cynbit team is ready to help.
+            </p>
+
+            {/* Action Buttons: Exact "Write us ->" and "Secure Voice Line" */}
+            <div className="pt-2 flex flex-wrap items-center gap-4">
+              <button
+                onClick={scrollToBlueprint}
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#065457] hover:bg-[#043E40] text-white font-semibold text-sm shadow-md hover:shadow-lg transition-all"
+              >
+                <span>Write us</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={scrollToBlueprint}
+                className="px-7 py-3.5 rounded-full bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#1F2937] font-semibold text-sm shadow-sm transition-all"
+              >
+                Secure Voice Line
+              </button>
             </div>
-            <div className="text-[11px] text-slate-500 font-mono mt-0.5">
-              High Availability Uptime
-            </div>
+
           </div>
 
-          <div className="p-3.5 rounded-xl border border-slate-800/70 bg-slate-900/40">
-            <div className="flex items-center gap-1.5 text-xs font-mono text-cyan-400 mb-1">
-              <Activity className="w-3.5 h-3.5" />
-              <span>EDGE SPEED</span>
+          {/* Right Column: Exact Floating Badges from Screenshot (4 cols) */}
+          <div className="lg:col-span-4 relative hidden lg:flex flex-col gap-6 items-end justify-center">
+            
+            {/* Floating Card 1: STATUS 100% Trust */}
+            <div className="bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-gray-100/80 flex items-center gap-3.5 w-64 transform translate-x-4">
+              <div className="w-10 h-10 rounded-full bg-[#FDE68A] flex items-center justify-center text-[#B45309] shrink-0">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block">
+                  STATUS
+                </span>
+                <span className="text-sm font-bold text-[#065457]">
+                  100% Trust
+                </span>
+              </div>
             </div>
-            <div className="text-xl font-bold font-mono text-slate-100">
-              &lt; 500ms
-            </div>
-            <div className="text-[11px] text-slate-500 font-mono mt-0.5">
-              Global Token & API Latency
-            </div>
-          </div>
 
-          <div className="p-3.5 rounded-xl border border-slate-800/70 bg-slate-900/40">
-            <div className="flex items-center gap-1.5 text-xs font-mono text-purple-400 mb-1">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>SECURITY MESH</span>
-            </div>
-            <div className="text-xl font-bold font-mono text-slate-100">
-              Zero-Trust
-            </div>
-            <div className="text-[11px] text-slate-500 font-mono mt-0.5">
-              End-to-End Cryptography
-            </div>
-          </div>
+            {/* Connecting soft line */}
+            <div className="w-24 h-[1px] bg-gray-200/80 mr-12" />
 
-          <div className="p-3.5 rounded-xl border border-slate-800/70 bg-slate-900/40">
-            <div className="flex items-center gap-1.5 text-xs font-mono text-emerald-400 mb-1">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>BITELEVATE</span>
+            {/* Floating Card 2: INTELLIGENCE */}
+            <div className="bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-[0_10px_30px_rgba(0,0,0,0.06)] border border-gray-100/80 flex items-center gap-3.5 w-64">
+              <div className="w-10 h-10 rounded-full bg-[#065457] flex items-center justify-center text-white shrink-0">
+                <Cpu className="w-5 h-5" />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#065457]">
+                    INTELLIGENCE
+                  </span>
+                </div>
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+                  <div className="bg-[#065457] h-full w-[65%]" />
+                </div>
+              </div>
             </div>
-            <div className="text-xl font-bold font-mono text-slate-100">
-              16+ Tracks
-            </div>
-            <div className="text-[11px] text-slate-500 font-mono mt-0.5">
-              Engineering Talent Pipeline
-            </div>
+
           </div>
 
         </div>
 
       </div>
-
     </section>
   );
 }
-

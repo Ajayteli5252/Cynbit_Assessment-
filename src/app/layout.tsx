@@ -2,9 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Cynbit Technologies | AI Automation & Software Solutions',
-  description: 'Engineering human-centric software solutions, autonomous AI agents, and distributed cloud architecture. Founded by digital architects in Jaipur, Rajasthan.',
-  keywords: ['Cynbit', 'AI Automation', 'BitElevate', 'Software Architecture', 'Next.js', 'System Scoper'],
+  title: 'Contact Us | Cynbit Technologies - AI Automation & Software Solutions',
+  description: 'Whether you are building a product, automating operations, or scaling digitally, our architects are ready to design the solution that scales with your ambition.',
 };
 
 export default function RootLayout({
@@ -13,22 +12,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" style={{ colorScheme: 'dark' }}>
+    <html lang="en" className="light" style={{ colorScheme: 'light' }}>
       <head>
-        {/* Critical Inline CSS: Prevents any white flash or unstyled FOUC before CSS chunks hydrate */}
         <style dangerouslySetInnerHTML={{ __html: `
           html, body {
-            background-color: #070a13 !important;
-            color: #f1f5f9 !important;
+            background: linear-gradient(135deg, #fbfdfd 0%, #f0f7f6 50%, #e6f3f2 100%) !important;
+            color: #111827 !important;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
           }
           button {
             border: none;
-            background: transparent;
             cursor: pointer;
             font-family: inherit;
           }
@@ -41,7 +37,7 @@ export default function RootLayout({
           }
         `}} />
       </head>
-      <body className="antialiased bg-slate-950 text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
+      <body className="antialiased min-h-screen text-slate-900">
         {children}
       </body>
     </html>
